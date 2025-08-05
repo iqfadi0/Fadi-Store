@@ -10,6 +10,7 @@ app.config['SECRET_KEY'] = 'your_secret_key_here'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///fadi_store.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'static', 'uploads')
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)  # هنا أضفت السطر
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5MB max image size
 
 db = SQLAlchemy(app)
