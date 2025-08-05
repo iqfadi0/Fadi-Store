@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Add Product - Fadi Store</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+    <div class="background-image"></div>
+    <div class="container form-container">
+        <h2>Add New Product</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="App Name" required />
+            <textarea name="description" placeholder="Description" required></textarea>
+            <input type="file" name="image" accept="image/*" />
+            <button type="submit">Add Product</button>
+        </form>
+        <a href="{{ url_for('admin_dashboard') }}" class="button">Back to Dashboard</a>
+    </div>
+</body>
+</html>

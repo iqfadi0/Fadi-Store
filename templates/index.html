@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fadi Store</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+    <div class="background-image"></div>
+    <div class="container">
+        <h1>Fadi Store</h1>
+        <div class="products">
+            {% for product in products %}
+            <div class="product-card">
+                {% if product.image_filename %}
+                <img src="{{ url_for('static', filename='uploads/' + product.image_filename) }}" alt="{{ product.name }}" />
+                {% endif %}
+                <h2>{{ product.name }}</h2>
+                <p>{{ product.description }}</p>
+                <a href="https://wa.me/{{ whatsapp }}" target="_blank" class="whatsapp-button">
+                    <img src="{{ url_for('static', filename='css/whatsapp-logo.png') }}" alt="WhatsApp" />
+                    Contact on WhatsApp
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

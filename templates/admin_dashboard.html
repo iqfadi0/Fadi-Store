@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Dashboard - Fadi Store</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+    <div class="background-image"></div>
+    <div class="container">
+        <h2>Admin Dashboard</h2>
+        <a href="{{ url_for('add_product') }}" class="button">Add New Product</a>
+        <a href="{{ url_for('change_password') }}" class="button">Change Password</a>
+        <a href="{{ url_for('logout') }}" class="button logout-button">Logout</a>
+        <table>
+            <thead>
+                <tr><th>Name</th><th>Description</th><th>Image</th><th>Actions</th></tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>
+                        {% if product.image_filename %}
+                        <img src="{{ url_for('static', filename='uploads/' + product.image_filename) }}" alt="{{ product.name }}" class="table-img" />
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ url_for('edit_product', product_id=product.id) }}" class="button">Edit</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
