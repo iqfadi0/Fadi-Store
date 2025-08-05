@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -43,14 +42,14 @@ class Product(db.Model):
 def load_user(admin_id):
     return Admin.query.get(int(admin_id))
 
-@app.before_first_request
 def create_tables():
-    db.create_all()
-    if not Admin.query.filter_by(username='admin').first():
-        admin = Admin(username='admin')
-        admin.set_password(ADMIN_DEFAULT_PASSWORD)
-        db.session.add(admin)
-        db.session.commit()
+    with app.app_context():
+        db.create_all()
+        if not Admin.query.filter_by(username='admin').first():
+            admin = Admin(username='admin')
+            admin.set_password(ADMIN_DEFAULT_PASSWORD)
+            db.session.add(admin)
+            db.session.commit()
 
 @app.route('/')
 def index():
@@ -137,4 +136,5 @@ def logout():
     return redirect(url_for('admin_login'))
 
 if __name__ == '__main__':
+    create_tables()
     app.run(debug=True)
